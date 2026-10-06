@@ -1,8 +1,6 @@
 // Shared JavaScript for the Practice Caddie pages.
 $(document).ready(function () {
   var parameters = new URLSearchParams(window.location.search);
-  // These selections reset when the page reloads or the user opens another page.
-  var savedIds = [];
 
   // These are sample sessions, not records from a database.
   var sessions = [
@@ -108,30 +106,11 @@ $(document).ready(function () {
 
   function makeSaveButton(session) {
     var button = $("<button type='button' class='save-session'>");
-    button.attr("data-session-id", session.id);
+    button.attr("data-session-title", session.title);
     button.attr("aria-pressed", "false");
     button.attr("aria-label", "Save " + session.title + " for later");
     button.text("Save for later");
     return button;
-  }
-
-  function showSavedState(card, session) {
-    var button = card.find(".save-session");
-    card.find(".saved-message").remove();
-
-    if (savedIds.indexOf(session.id) !== -1) {
-      card.addClass("is-saved");
-      button.attr("aria-pressed", "true");
-      button.attr("aria-label", "Unsave " + session.title + " for later");
-      button.text("Remove from saved");
-      // Add a new paragraph when the session is saved.
-      card.append("<p class='saved-message'>Marked for review until you reload or leave this page.</p>");
-    } else {
-      card.removeClass("is-saved");
-      button.attr("aria-pressed", "false");
-      button.attr("aria-label", "Save " + session.title + " for later");
-      button.text("Save for later");
-    }
   }
 
   // Reuse the same cards on the history and search pages.
@@ -159,32 +138,32 @@ $(document).ready(function () {
       actions.append(link);
       actions.append(makeSaveButton(session));
       card.append(actions);
-      showSavedState(card, session);
       list.append(card);
     }
   }
 
   // Interaction 1: delegate clicks to main so new buttons work too.
   $("#main-content").on("click", ".save-session", function () {
-    var id = $(this).attr("data-session-id");
-    var session = findSession(id);
-    if (!session) {
-      return;
-    }
+    var button = $(this);
+    var card = button.closest(".session-card, #detail-actions");
+    var title = button.attr("data-session-title");
 
-    var position = savedIds.indexOf(id);
-    var message;
-    if (position === -1) {
-      savedIds.push(id);
-      message = session.title + " saved on this page.";
+    // The button itself tells us whether this session is currently selected.
+    if (button.attr("aria-pressed") === "false") {
+      card.addClass("is-saved");
+      button.attr("aria-pressed", "true");
+      button.attr("aria-label", "Unsave " + title + " for later");
+      button.text("Remove from saved");
+      card.append("<p class='saved-message'>Marked for review in this view.</p>");
+      $("#saved-status").text(title + " saved in this view.");
     } else {
-      savedIds.splice(position, 1);
-      message = session.title + " removed from saved sessions.";
+      card.removeClass("is-saved");
+      button.attr("aria-pressed", "false");
+      button.attr("aria-label", "Save " + title + " for later");
+      button.text("Save for later");
+      card.find(".saved-message").remove();
+      $("#saved-status").text(title + " removed from saved sessions.");
     }
-
-    var card = $(this).closest(".session-card, #detail-actions");
-    showSavedState(card, session);
-    $("#saved-status").text(message);
   });
 
   // Simulated search: only the keyphrase "putting" returns results.
@@ -291,23 +270,6 @@ $(document).ready(function () {
     });
     $("#sort-sessions").on("change", filterSessions);
     filterSessions();
-
-    // The log form sends a GET preview; it does not change the sample data.
-    if (parameters.has("session-title")) {
-      var preview = $("<section class='panel session-preview'>");
-      preview.attr("aria-labelledby", "preview-title");
-      preview.append("<h2 id='preview-title'>Your session preview</h2>");
-      preview.append($("<h3>").text(parameters.get("session-title")));
-      var previewDate = parameters.get("practice-date") || "";
-      var previewLocation = parameters.get("practice-location") || "";
-      var previewDuration = parameters.get("duration") || "";
-      preview.append($("<p>").text(previewDate + " · " + previewLocation + " · " + previewDuration + " minutes"));
-      preview.append($("<p>").text(parameters.get("drill-name") || "No drill recorded."));
-      preview.append($("<p>").text(parameters.get("drill-result") || "No result recorded."));
-      preview.append($("<p>").text(parameters.get("session-notes") || "No notes recorded."));
-      preview.append("<p class='session-meta'>Preview only. This session has not been saved to the sample history.</p>");
-      preview.insertBefore($("#history-layout"));
-    }
   }
 
   // Display the sample selected by the detail link's id.
@@ -340,9 +302,7 @@ $(document).ready(function () {
         $("#detail-drills").append(row);
       }
 
-      $("#detail-actions").attr("data-session-id", selectedSession.id);
       $("#detail-actions .action-buttons").append(makeSaveButton(selectedSession));
-      showSavedState($("#detail-actions"), selectedSession);
     } else {
       $("#main-content").empty();
       $("#main-content").append("<h1>Session not found</h1>");
