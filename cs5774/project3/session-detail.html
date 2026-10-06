@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Putting + Wedge Practice | Practice Caddie</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/vendor/jquery-3.7.1.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <!-- Public and signed-in pages use different navigation. -->
+  <header class="site-header">
+    <div class="site-shell row spread header-inner">
+      <a class="brand" href="dashboard.html" aria-label="Practice Caddie dashboard">
+        <span>Practice Caddie</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <ul class="row">
+          <li><a href="dashboard.html">Home</a></li>
+          <li><a href="sessions.html" aria-current="page">Sessions</a></li>
+          <li><a href="log-session.html">Log session</a></li>
+          <li><a href="dashboard.html#progress">Progress</a></li>
+        </ul>
+      </nav>
+      <div aria-label="Signed in as John Doe">
+        <span>John Doe</span>
+      </div>
+    </div>
+    <form class="header-search site-shell" action="search-results.html" method="get" role="search">
+      <label for="header-query">Search practice</label>
+      <div class="row">
+        <input type="search" id="header-query" name="q" placeholder="Try putting" aria-describedby="search-hint">
+        <button class="primary" type="submit">Search</button>
+      </div>
+      <p id="search-hint" class="session-meta">Try “putting” for a sample session and practice plan.</p>
+    </form>
+  </header>
+
+  <main id="main-content" class="site-shell">
+    <noscript><p class="notice">Enable JavaScript to use search results, saved sessions, filters, and practice plans.</p></noscript>
+    <section aria-labelledby="detail-title">
+      <a href="sessions.html">Back to Sessions Overview</a>
+      <h1 id="detail-title">Putting + Wedge Practice</h1>
+      <p class="row">
+        <span><time id="detail-date" datetime="2026-09-10">September 10, 2026</time></span>
+        <span id="detail-location">Home Course Golf Center</span>
+        <span id="detail-duration">42 minutes</span>
+      </p>
+    </section>
+
+    <!-- Overview and notes stack vertically on phones. -->
+    <div class="columns wide-left section-block">
+      <section id="session-overview" class="panel" aria-labelledby="overview-title">
+        <h2 id="overview-title">Session Overview</h2>
+        <dl class="columns two-columns">
+          <div>
+            <dt>Primary focus</dt>
+            <dd id="detail-focus">Putting</dd>
+          </div>
+          <div>
+            <dt>Clubs used</dt>
+            <dd id="detail-clubs">Putter, 56 Degree</dd>
+          </div>
+          <div>
+            <dt>Effort</dt>
+            <dd id="detail-effort">Moderate</dd>
+          </div>
+          <div>
+            <dt>Overall result</dt>
+            <dd id="detail-result">Good</dd>
+          </div>
+        </dl>
+      </section>
+
+      <aside class="panel" aria-labelledby="notes-title">
+        <h2 id="notes-title">Notes</h2>
+        <p id="detail-notes">Tempo felt better after slowing the backswing on shorter putts. Wedge contact was solid, but distance control drifted long once tired.</p>
+      </aside>
+    </div>
+
+    <section class="panel section-block" aria-labelledby="drills-title">
+      <h2 id="drills-title">Drills and Results</h2>
+      <div id="detail-drills" class="drill-list">
+        <article class="drill-row row spread">
+          <div>
+            <h3>3 Foot Circle Drill</h3>
+            <p>18 of 20 made from around the hole.</p>
+          </div>
+          <strong class="score">90%</strong>
+        </article>
+        <article class="drill-row row spread">
+          <div>
+            <h3>6 Foot Straight Putts</h3>
+            <p>40 of 50 made with the same pre-shot routine.</p>
+          </div>
+          <strong class="score">80%</strong>
+        </article>
+        <article class="drill-row row spread">
+          <div>
+            <h3>50 Yard Wedge Ladder</h3>
+            <p>10 of 15 shots finished inside the fifteen-foot target circle.</p>
+          </div>
+          <strong class="score">67%</strong>
+        </article>
+      </div>
+    </section>
+
+    <section id="detail-actions" class="panel section-block" aria-labelledby="actions-title">
+      <h2 id="actions-title">Session actions</h2>
+      <p>Keep this sample session handy for your next practice review.</p>
+      <div class="row action-buttons">
+        <a href="log-session.html">Log a new session</a>
+      </div>
+    </section>
+    <p id="saved-status" class="interaction-status" role="status" aria-atomic="true"></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-shell row spread">
+      <p>Practice Caddie</p>
+      <p>Sample account. Saved favorites last for this tab; session previews are not stored.</p>
+    </div>
+  </footer>
+</body>
+</html>

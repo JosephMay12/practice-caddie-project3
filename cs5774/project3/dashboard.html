@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Practice Caddie</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/vendor/jquery-3.7.1.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <!-- Public and signed-in pages use different navigation. -->
+  <header class="site-header">
+    <div class="site-shell row spread header-inner">
+      <a class="brand" href="dashboard.html" aria-label="Practice Caddie dashboard">
+        <span>Practice Caddie</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <ul class="row">
+          <li><a href="dashboard.html" aria-current="page">Home</a></li>
+          <li><a href="sessions.html">Sessions</a></li>
+          <li><a href="log-session.html">Log session</a></li>
+          <li><a href="dashboard.html#progress">Progress</a></li>
+        </ul>
+      </nav>
+      <div aria-label="Signed in as John Doe">
+        <span>John Doe</span>
+      </div>
+    </div>
+    <form class="header-search site-shell" action="search-results.html" method="get" role="search">
+      <label for="header-query">Search practice</label>
+      <div class="row">
+        <input type="search" id="header-query" name="q" placeholder="Try putting" aria-describedby="search-hint">
+        <button class="primary" type="submit">Search</button>
+      </div>
+      <p id="search-hint" class="session-meta">Try “putting” for a sample session and practice plan.</p>
+    </form>
+  </header>
+
+  <main id="main-content" class="site-shell">
+    <noscript><p class="notice">Enable JavaScript to use search results, saved sessions, filters, and practice plans.</p></noscript>
+    <section class="row spread" aria-labelledby="dashboard-title">
+      <div>
+        <h1 id="dashboard-title">Your practice overview</h1>
+        <p>You have spent the most time on putting this month. Try adding a driving drill to your next session.</p>
+      </div>
+      <a class="btn primary" href="log-session.html">Log session</a>
+    </section>
+
+    <!-- Sample totals for the signed-in dashboard. -->
+    <section class="columns four-columns section-block" aria-label="Practice summary statistics">
+      <article class="panel">
+        <h2>Sessions</h2>
+        <strong class="stat-value">6</strong>
+        <p>Last 30 days</p>
+      </article>
+      <article class="panel">
+        <h2>Total Practice</h2>
+        <strong class="stat-value">4 hr 18 min</strong>
+        <p>Logged time</p>
+      </article>
+      <article class="panel">
+        <h2>Top Focus</h2>
+        <strong class="stat-value">Putting</strong>
+        <p>Most practiced</p>
+      </article>
+      <article class="panel">
+        <h2>Needs Attention</h2>
+        <strong class="stat-value">Driving</strong>
+        <p>Least practiced</p>
+      </article>
+    </section>
+
+    <div id="progress" class="columns wide-left section-block">
+      <section class="panel" aria-labelledby="balance-title">
+        <h2 id="balance-title">Practice Balance</h2>
+        <div class="bar-row">
+          <span>Driving</span>
+          <meter min="0" max="100" value="24" aria-label="Driving practice">24%</meter>
+          <strong>24%</strong>
+        </div>
+        <div class="bar-row">
+          <span>Irons</span>
+          <meter min="0" max="100" value="45" aria-label="Irons practice">45%</meter>
+          <strong>45%</strong>
+        </div>
+        <div class="bar-row">
+          <span>Wedges</span>
+          <meter min="0" max="100" value="52" aria-label="Wedges practice">52%</meter>
+          <strong>52%</strong>
+        </div>
+        <div class="bar-row">
+          <span>Short Game</span>
+          <meter min="0" max="100" value="38" aria-label="Short Game practice">38%</meter>
+          <strong>38%</strong>
+        </div>
+        <div class="bar-row">
+          <span>Putting</span>
+          <meter min="0" max="100" value="73" aria-label="Putting practice">73%</meter>
+          <strong>73%</strong>
+        </div>
+      </section>
+
+      <!-- CHANGE interaction: selecting a focus builds a new drill plan. -->
+      <section id="practice-planner" class="panel practice-planner" aria-labelledby="plan-title">
+        <h2 id="plan-title" class="plan-title">Build your next practice plan</h2>
+        <p class="plan-description">Choose a focus to create a short routine for your next session.</p>
+        <label for="focus-area">Practice focus</label>
+        <select id="focus-area" name="focus-area">
+          <option value="" disabled selected>Choose a focus</option>
+          <option value="driving">Driving</option>
+          <option value="putting">Putting</option>
+          <option value="wedges">Wedges</option>
+          <option value="irons">Irons</option>
+          <option value="short-game">Short game</option>
+        </select>
+        <p class="plan-status interaction-status" role="status" aria-atomic="true"></p>
+        <div class="plan-content"></div>
+        <a class="btn primary" href="log-session.html">Log your practice</a>
+      </section>
+    </div>
+
+    <section class="section-block" aria-labelledby="recent-title">
+      <h2 id="recent-title">Recent sessions</h2>
+      <ul>
+        <li><time datetime="2026-09-10">September 10</time>: <a href="session-detail.html?id=putting-wedges">Putting + Wedges</a>, 18 of 20 putts made from three feet.</li>
+        <li><time datetime="2026-09-09">September 9</time>: <a href="session-detail.html?id=driver">Driver</a>, 12 of 25 shots inside the fairway target.</li>
+        <li><time datetime="2026-09-08">September 8</time>: <a href="session-detail.html?id=wedges">Wedges</a>, 10 of 50 shots within three feet.</li>
+      </ul>
+      <a href="sessions.html">View session history</a>
+    </section>
+
+    <figure class="section-block practice-photo">
+      <!-- Image credit: "Golf balls driving range.jpg" by Semevent, Wikimedia Commons, CC0 1.0. Source: https://commons.wikimedia.org/wiki/File:Golf_balls_driving_range.jpg -->
+      <img src="images/range-balls.jpg" alt="Close-up of a golf ball resting on practice-range grass">
+      <figcaption>Use the dashboard before practice to choose a focused plan.</figcaption>
+    </figure>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-shell row spread">
+      <p>Practice Caddie</p>
+      <p>Sample account. Saved favorites last for this tab; session previews are not stored.</p>
+    </div>
+  </footer>
+</body>
+</html>
