@@ -1,0 +1,368 @@
+﻿/* Shared colors and basic document styles. */
+:root {
+  --green: #254d35;
+  --light: #edf1eb;
+  --border: #8a958a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #fafaf7;
+  color: #252b25;
+  font: 1rem/1.5 Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3 {
+  margin: 0 0 0.75rem;
+  line-height: 1.25;
+}
+
+h1 {
+  font: bold 2rem/1.25 "Times New Roman", Times, serif;
+}
+
+h2 {
+  font-size: 1.25rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+p, figure, dl {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--green);
+  text-underline-offset: 3px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.practice-photo img {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+}
+
+figcaption, .session-meta {
+  color: #465046;
+  font-size: 0.9rem;
+}
+
+/* Header and footer share the same centered width as the pages. */
+.site-shell {
+  width: 94%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.site-header, .site-footer {
+  padding: 1rem 0;
+  background: var(--light);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  border-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.brand {
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.primary-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.primary-nav a {
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+.primary-nav a[aria-current="page"] {
+  font-weight: bold;
+  text-decoration-thickness: 3px;
+}
+
+/* Reuse these rows, grids, and panels on all prototype pages. */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spread {
+  justify-content: space-between;
+}
+
+main {
+  padding: 2rem 0 3rem;
+}
+
+.section-block {
+  margin-top: 1.5rem;
+}
+
+.columns, .session-list, .drill-list {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+}
+
+.columns > *, .row > * {
+  min-width: 0;
+}
+
+.two-columns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.three-columns {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.four-columns {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sidebar-layout {
+  grid-template-columns: 240px minmax(0, 1fr);
+}
+
+.wide-left {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+.panel, fieldset {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  background: white;
+}
+
+.panel > :last-child {
+  margin-bottom: 0;
+}
+
+.stat-value, .score {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--green);
+}
+
+.drill-row {
+  padding: 1rem;
+  background: var(--light);
+}
+
+.drill-row p {
+  margin-bottom: 0;
+}
+
+dd {
+  margin: 0;
+}
+
+/* Native meters expose chart values to screen readers. */
+.bar-row {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr) 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+meter {
+  width: 100%;
+  height: 1.5rem;
+}
+
+meter::-webkit-meter-bar, meter::-webkit-meter-optimum-value {
+  border-radius: 0;
+}
+
+/* Fields inherit the page font; native validation handles required fields. */
+button, input, select, textarea {
+  font: inherit;
+  border-radius: 0;
+}
+
+.btn, button {
+  display: inline-block;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--green);
+  color: var(--green);
+  background: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--green);
+  color: white;
+}
+
+.danger {
+  color: #822b20;
+  border-color: #822b20;
+}
+
+.btn:hover, button:hover {
+  text-decoration: underline;
+}
+
+label, legend, dt {
+  font-weight: bold;
+}
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  background: white;
+  color: inherit;
+}
+
+.filter-group, fieldset {
+  margin: 1rem 0;
+}
+
+fieldset {
+  min-width: 0;
+}
+
+.checkbox-option {
+  display: block;
+  font-weight: normal;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+}
+
+.full-span {
+  grid-column: 1 / -1;
+}
+
+/* Keyboard navigation remains visible on every background. */
+:focus-visible {
+  outline: 2px solid #822b20;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -10000px;
+  padding: 0.75rem;
+  background: white;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 0;
+}
+
+/* Project 3: a real header form with room for keyboard and mobile use. */
+.header-search {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.header-search .row {
+  gap: 0.5rem;
+  max-width: 36rem;
+  margin-top: 0.25rem;
+}
+
+.header-search input {
+  flex: 1 1 12rem;
+  width: auto;
+}
+
+.header-search .session-meta {
+  margin: 0.35rem 0 0;
+}
+
+/* Saved state is expressed through text and aria-pressed as well as color. */
+.session-card.is-saved, #detail-actions.is-saved {
+  border-left: 5px solid var(--green);
+  background: var(--light);
+}
+
+.saved-message, .interaction-status {
+  color: var(--green);
+  font-weight: bold;
+}
+
+.saved-message {
+  margin-top: 0.75rem;
+}
+
+.interaction-status:empty {
+  margin: 0;
+}
+
+.practice-planner select {
+  margin-top: 0.25rem;
+}
+
+.practice-planner.has-plan {
+  border-top: 5px solid var(--green);
+}
+
+.practice-planner .plan-status {
+  margin-top: 0.75rem;
+}
+
+.plan-steps {
+  padding-left: 1.4rem;
+}
+
+.plan-steps li + li {
+  margin-top: 0.5rem;
+}
+
+.notice, .session-preview {
+  padding: 1rem;
+  border: 1px solid var(--green);
+  background: var(--light);
+}
+
+.session-card p, .session-preview p, #search-summary {
+  overflow-wrap: anywhere;
+}
+
+/* Author CSS must never reveal an element with the HTML hidden attribute. */
+[hidden] {
+  display: none !important;
+}
+
+/* Stack columns on phones; navigation wraps without a menu script. */
+@media (max-width: 767px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+  .header-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
