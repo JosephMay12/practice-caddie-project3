@@ -1,8 +1,8 @@
 // Shared JavaScript for the Practice Caddie pages.
 $(document).ready(function () {
   var parameters = new URLSearchParams(window.location.search);
+  // These selections reset when the page reloads or the user opens another page.
   var savedIds = [];
-  var storageKey = "practice-caddie-saved-sessions";
 
   // These are sample sessions, not records from a database.
   var sessions = [
@@ -97,19 +97,6 @@ $(document).ready(function () {
     }
   };
 
-  // Remember saved sessions while the user browses in the same tab.
-  try {
-    var storedIds = sessionStorage.getItem(storageKey);
-    if (storedIds) {
-      savedIds = JSON.parse(storedIds);
-      if (!Array.isArray(savedIds)) {
-        savedIds = [];
-      }
-    }
-  } catch (error) {
-    savedIds = [];
-  }
-
   function findSession(id) {
     for (var i = 0; i < sessions.length; i++) {
       if (sessions[i].id === id) {
@@ -138,7 +125,7 @@ $(document).ready(function () {
       button.attr("aria-label", "Unsave " + session.title + " for later");
       button.text("Remove from saved");
       // Add a new paragraph when the session is saved.
-      card.append("<p class='saved-message'>Saved for your next practice review.</p>");
+      card.append("<p class='saved-message'>Marked for review until you reload or leave this page.</p>");
     } else {
       card.removeClass("is-saved");
       button.attr("aria-pressed", "false");
@@ -189,16 +176,10 @@ $(document).ready(function () {
     var message;
     if (position === -1) {
       savedIds.push(id);
-      message = session.title + " saved for later.";
+      message = session.title + " saved on this page.";
     } else {
       savedIds.splice(position, 1);
       message = session.title + " removed from saved sessions.";
-    }
-
-    try {
-      sessionStorage.setItem(storageKey, JSON.stringify(savedIds));
-    } catch (error) {
-      message += " Browser storage is unavailable; this change lasts until you leave the page.";
     }
 
     var card = $(this).closest(".session-card, #detail-actions");
