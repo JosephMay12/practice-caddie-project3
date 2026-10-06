@@ -42,9 +42,9 @@
     <noscript><p class="notice">Enable JavaScript to use search results, saved sessions, filters, and practice plans.</p></noscript>
     <section class="panel" aria-labelledby="log-title">
       <h1 id="log-title">Log session</h1>
-      <p>Preview what you worked on and anything you want to remember next time. This prototype does not permanently save new sessions. Date, location, duration, and title are required.</p>
+      <p>Enter your practice details. This sample form returns to session history; new sessions are not saved. Date, location, duration, and title are required.</p>
 
-      <!-- Native validation, followed by a GET session preview on the history page. -->
+      <!-- Required fields validate before the form returns to sample history. -->
       <form action="sessions.html" method="get">
         <div class="columns two-columns">
           <div>
@@ -94,7 +94,7 @@
 
         <div class="row section-block">
           <a href="sessions.html">Cancel</a>
-          <button class="primary" type="submit">Preview session</button>
+          <button class="primary" type="submit">Return to history</button>
         </div>
       </form>
     </section>
@@ -103,7 +103,7 @@
   <footer class="site-footer">
     <div class="site-shell row spread">
       <p>Practice Caddie</p>
-      <p>Sample account. Favorites apply to this page only. Session previews are not stored.</p>
+      <p>Sample account. Favorites apply to this view only. New sessions are not saved.</p>
     </div>
   </footer>
 </body>
